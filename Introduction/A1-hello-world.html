@@ -5,27 +5,100 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+    <!-- ①声明式渲染 -->
      <div id="app">
          <p>{{ message }}</p>
-     </div> 
+     </div>
+
      <div id='app-2'>
          <span v-bind:title = 'message'>
              鼠标悬停几秒钟查看此处动态绑定的提示信息！
          </span>
-     </div>  
+     </div>
+
+     <!-- ②条件与循环 -->
+     <div id="app-3">
+        <p v-if='seen'>现在你看到我了！</p>
+     </div>
+
+     <div id="app-4">
+         <ol>
+             <li v-for='todo in todos'>
+                 {{ todo.text }}
+             </li>
+         </ol>
+     </div>
+
+     <!-- ③处理用户输入 -->
+     <div id="app-5">
+         <p>{{ message }}</p>
+         <button v-on:click='reverseMessage'>逆转信息</button>
+     </div>
+
+     <div id="app-6">
+         <p>{{message}}</p>
+         <input v-model='message'>
+     </div>
+
      <script type="text/javascript">
+        // ①声明式渲染
         var app1 =  new Vue({
             el: '#app',
             data: {
                 message: 'Hello Vue.js!'
             }
          })
+
          var app2 = new Vue({
             el: '#app-2',
+            // 没有想到这个new Date().toLocaleString(),如果是翻墙(装的chrome插进)预览这个页面的话,
+            // 这时间是国外的
+            // 看来预览这个页面只好在无痕模式下预览了，不然在本地看都得要兜几圈回来
             data: {
                 message: '页面加载于'+ new Date().toLocaleString()
             }
          })
+
+         // ②条件与循环
+         var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                seen: true
+            }
+         })
+
+         var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                todos: [
+                    { text: '学习 JavaScript'},
+                    { text: '学习 Vue'},
+                    { text: '整个牛项目'}
+                ]
+            }
+         })
+
+         // ③处理用户输入
+         var app5 = new Vue({
+            el: '#app-5',
+            data: {
+                message: 'Hello Vue.js!'
+            },
+            methods: {
+                reverseMessage() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+         })
+
+         var app6 = new Vue({
+            el: '#app-6',
+            data: {
+                message: 'Hello Vue!'
+            }
+         })
+
+
      </script>
 </body>
 </html>
