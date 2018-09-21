@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a :href="url" target='_blank'>{{search}}</a>
+        <a @click="doSomething">换个搜索引擎</a>
+    </div>
+    <script>
+      var a = new Vue({
+          el: '#app',
+          data: {
+            url: 'https://www.baidu.com/',
+            search: '百度一下',
+            flag: 1
+          },
+          methods: {
+            doSomething: function () {
+              switch (this.flag) {
+                case 0:
+                  this.url = 'https://www.baidu.com/'
+                  this.search = '百度一下'
+                  this.flag = 1
+                  break;
+                case 1:
+                  this.url = 'https://www.google.com.hk/?gws_rd=ssl'
+                  this.search = '谷歌一下'
+                  this.flag = 0
+                  break;
+              }
+            }
+          }
+        })
+    </script>
+</body>
+</html>
